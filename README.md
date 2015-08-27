@@ -1,6 +1,8 @@
 # PixelColor
 > Get pixel color from screen.
 
+<p align="center"><img src="https://cloudup.com/iHaL0V9oyLk+"></p>
+
 ## Usage
 
 Hover mouse over desired pixel to get color. 
