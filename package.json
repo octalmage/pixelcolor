@@ -1,0 +1,21 @@
+{
+  "name": "pixelcolor",
+  "version": "0.0.1",
+  "description": "Get pixel color under the mouse.",
+  "main": "index.html",
+   "window": {
+       "always-on-top": true,
+       "toolbar": false,
+       "width": 150,
+       "height": 150,
+       "title": "PixelColor"
+   },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jason Stallings <jason@stallin.gs>",
+  "license": "GPL-2.0",
+  "dependencies": {
+    "robotjs": "^0.2.3"
+  }
+}
