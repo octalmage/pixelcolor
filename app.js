@@ -32,8 +32,7 @@ var shortcut = new gui.Shortcut(pauseHotkey);
 
 gui.App.registerGlobalHotKey(shortcut);
 
-//Needed for copy/paste  on Mac.
-
+//Needed for copy/paste on Mac.
 if (process.platform === "darwin")
 {
 	var nativeMenuBar = new gui.Menu(
