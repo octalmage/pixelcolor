@@ -28,30 +28,19 @@ var pauseHotkey = {
 	}
 };
 
-var shortcut = new gui.Shortcut(pauseHotkey);
+// var shortcut = new gui.Shortcut(pauseHotkey);
 
-gui.App.registerGlobalHotKey(shortcut);
+// gui.App.registerGlobalHotKey(shortcut);
 
-//Needed for copy/paste on Mac.
-if (process.platform === "darwin")
-{
-	var nativeMenuBar = new gui.Menu(
-	{
-		type: "menubar"
-	});
-	nativeMenuBar.createMacBuiltin("PixelColor");
-	win.menu = nativeMenuBar;
-}
-
-$(document).on("ready", function() 
+$(document).on("ready", function()
 {
     start();
-    
+
     $("#color").on("click", function()
     {
         clipboard.set(hex, "text");
     });
-    
+
 });
 
 function start()
