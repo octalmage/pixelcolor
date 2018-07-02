@@ -4,7 +4,8 @@
   "description": "Get pixel color under the mouse.",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "test": "eslint **/*.js"
   },
   "author": "Jason Stallings <jason@stallin.gs>",
   "license": "GPL-2.0",
@@ -13,6 +14,9 @@
   },
   "devDependencies": {
     "electron": "^2.0.3",
-    "electron-rebuild": "^1.7.3"
+    "electron-rebuild": "^1.7.3",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-plugin-import": "^2.13.0"
   }
 }
