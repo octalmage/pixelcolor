@@ -1,21 +1,21 @@
 {
   "name": "pixelcolor",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Get pixel color under the mouse.",
-  "main": "index.html",
-   "window": {
-       "always-on-top": true,
-       "toolbar": false,
-       "width": 150,
-       "height": 150,
-       "title": "PixelColor"
-   },
+  "main": "app.js",
   "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --mac",
+    "postinstall": "npx @electron/rebuild",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Jason Stallings <jason@stallin.gs>",
   "license": "GPL-2.0",
   "dependencies": {
-    "robotjs": "^0.2.3"
+    "electron": "^36.0.0",
+    "robotjs": "^0.7.1"
+  },
+  "devDependencies": {
+    "@electron/rebuild": "^4.0.4"
   }
 }

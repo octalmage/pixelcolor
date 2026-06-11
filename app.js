@@ -1,66 +1,66 @@
-var robot = require("robotjs");
-var gui = require("nw.gui");
+const { app, BrowserWindow, globalShortcut, ipcMain, Menu } = require("electron");
+const robot = require("robotjs");
+let win;
 
-var win = gui.Window.get();
-var clipboard = gui.Clipboard.get();
+function createWindow() {
+    win = new BrowserWindow({
+        alwaysOnTop: true,
+        width: 160,
+        height: 140,
+        title: "PixelColor",
+        frame: false,
+        webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: false
+        }
+    });
 
-var timer = null;
-var hex;
+    if (process.platform === "darwin") {
+        const template = [
+            { label: app.name, submenu: [{ role: "about" }, { type: "separator" }, { role: "quit" }] },
+            { role: "editMenu" },
+            { role: "windowMenu" }
+        ];
+        Menu.setApplicationMenu(Menu.buildFromTemplate(template));
+    }
 
-//Pause the app so you can copy the color.
-var pauseHotkey = {
-	key: "Ctrl+Alt+P",
-	active: function()
-	{
-		if (timer === null)
-		{
-			start();
-		}
-		else
-		{
-			clearTimeout(timer);
-			timer = null;
-		}
-	},
-	failed: function(msg)
-	{
-		console.log(msg);
-	}
-};
+    win.loadFile("index.html");
+    win.show();
 
-var shortcut = new gui.Shortcut(pauseHotkey);
-
-gui.App.registerGlobalHotKey(shortcut);
-
-//Needed for copy/paste on Mac.
-if (process.platform === "darwin")
-{
-	var nativeMenuBar = new gui.Menu(
-	{
-		type: "menubar"
-	});
-	nativeMenuBar.createMacBuiltin("PixelColor");
-	win.menu = nativeMenuBar;
+    globalShortcut.register("CmdOrCtrl+Alt+P", () => {
+        if (win) win.webContents.send("toggle-pause");
+    });
 }
 
-$(document).on("ready", function() 
-{
-    start();
-    
-    $("#color").on("click", function()
-    {
-        clipboard.set(hex, "text");
-    });
-    
+app.whenReady().then(createWindow);
+
+app.on("window-all-closed", () => {
+    if (process.platform !== "darwin") app.quit();
 });
 
-function start()
-{
-	timer = setInterval(function()
-	{
-		var mouse = robot.getMousePos();
-		hex = robot.getPixelColor(mouse.x, mouse.y);
-		$("#color").text(hex);
-		$("body").css("background-color", "#" + hex);
-	}, 200);
+app.on("activate", () => {
+    if (BrowserWindow.getAllWindows().length === 0) createWindow();
+});
+
+app.on("will-quit", () => globalShortcut.unregisterAll());
+
+let maxW = 0, maxH = 0;
+
+function initBounds() {
+    if (maxW === 0) {
+        const { screen } = require("electron");
+        const workArea = screen.getPrimaryDisplay().workAreaSize;
+        maxW = workArea.width;
+        maxH = workArea.height;
+    }
 }
+
+ipcMain.on("getPixelColor", (event) => {
+    initBounds();
+    const pos = robot.getMousePos();
+    if (pos.x >= 0 && pos.x < maxW && pos.y >= 0 && pos.y < maxH) {
+        event.returnValue = [pos.x, pos.y, robot.getPixelColor(pos.x, pos.y)];
+    } else {
+        event.returnValue = [pos.x, pos.y, null];
+    }
+});

@@ -1,36 +1,32 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'">
     <title>PixelColor</title>
-    
-    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    <script src="app.js"></script>
-	
     <style type="text/css">
-    
-    body
-    {
-        margin: 0px;
-        padding: 0px;
-        transition: background-color 0.2s ease;
-    }
-    
-    #color
-    {
-        background-color: #000;
-        color: #FFF;
-        text-align: center;
-        width: 100%;
-        padding: 5px;
-        position: fixed;
-        bottom: 0px;
-        opacity: .8;
-    }
-    
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            width: 160px; height: 140px;
+            background-color: #000;
+            transition: background-color 0.2s ease;
+            user-select: none;
+            display: flex; flex-direction: column;
+        }
+        #drag {
+            flex: 1; cursor: move;
+        }
+        #color {
+            background-color: rgba(0,0,0,.8); color: #FFF;
+            text-align: center; padding: 5px;
+            font-family: monospace; font-size: 13px;
+            cursor: pointer;
+        }
     </style>
 </head>
-  <body>   
-      <div id="color"></div>
-  </body>
+<body>
+    <div id="drag"></div>
+    <div id="color">---</div>
+    <script src="renderer.js"></script>
+</body>
 </html>

@@ -7,9 +7,23 @@
 
 Hover mouse over desired pixel to get color. 
 
-Press <kbd>Command</kbd>+<kbd>Alt</kbd>+<kbd>P</kbd> to pause the app. 
+Press <kbd>⌘</kbd>+<kbd>Alt</kbd>+<kbd>P</kbd> / <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>P</kbd> to pause the app. 
 
-Click the hex code to copy it to the clipboard. 
+Click the hex code to copy it to the clipboard.
+
+## Development
+
+```bash
+npm install
+npm start
+```
+
+### Building (macOS)
+
+```bash
+npm install electron-builder -g
+electron-builder --mac
+```
 
 ## License
 
