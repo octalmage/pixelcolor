@@ -6,16 +6,12 @@
   "scripts": {
     "start": "electron .",
     "build": "electron-builder --mac",
-    "postinstall": "npx @electron/rebuild",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Jason Stallings <jason@stallin.gs>",
   "license": "GPL-2.0",
   "dependencies": {
     "electron": "^36.0.0",
-    "robotjs": "^0.7.1"
-  },
-  "devDependencies": {
-    "@electron/rebuild": "^4.0.4"
+    "robotjs": "^0.9.1"
   }
 }

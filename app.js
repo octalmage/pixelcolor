@@ -7,8 +7,8 @@ function createWindow() {
         alwaysOnTop: true,
         width: 160,
         height: 140,
+        useContentSize: true,
         title: "PixelColor",
-        frame: false,
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false
@@ -26,6 +26,7 @@ function createWindow() {
 
     win.loadFile("index.html");
     win.show();
+    win.on("closed", () => { win = null; });
 
     globalShortcut.register("CmdOrCtrl+Alt+P", () => {
         if (win) win.webContents.send("toggle-pause");
