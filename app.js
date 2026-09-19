@@ -22,6 +22,8 @@ function createWindow() {
             { role: "windowMenu" }
         ];
         Menu.setApplicationMenu(Menu.buildFromTemplate(template));
+    } else {
+        Menu.setApplicationMenu(null);
     }
 
     win.loadFile("index.html");
