@@ -5,7 +5,7 @@
 
 ## Usage
 
-Hover mouse over desired pixel to get color. 
+Hover mouse over the desired pixel on any connected monitor to get its color.
 
 Press <kbd>⌘</kbd>+<kbd>Alt</kbd>+<kbd>P</kbd> / <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>P</kbd> to pause the app. 
 

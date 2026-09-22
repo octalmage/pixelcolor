@@ -7,6 +7,9 @@ function createWindow() {
         alwaysOnTop: true,
         width: 160,
         height: 140,
+        minWidth: 160,
+        minHeight: 140,
+        resizable: true,
         useContentSize: true,
         title: "PixelColor",
         webPreferences: {
@@ -47,23 +50,12 @@ app.on("activate", () => {
 
 app.on("will-quit", () => globalShortcut.unregisterAll());
 
-let maxW = 0, maxH = 0;
-
-function initBounds() {
-    if (maxW === 0) {
-        const { screen } = require("electron");
-        const workArea = screen.getPrimaryDisplay().workAreaSize;
-        maxW = workArea.width;
-        maxH = workArea.height;
-    }
-}
-
 ipcMain.on("getPixelColor", (event) => {
-    initBounds();
     const pos = robot.getMousePos();
-    if (pos.x >= 0 && pos.x < maxW && pos.y >= 0 && pos.y < maxH) {
-        event.returnValue = [pos.x, pos.y, robot.getPixelColor(pos.x, pos.y)];
-    } else {
+    try {
+        const color = robot.screen.capture(pos.x, pos.y, 1, 1).colorAt(0, 0);
+        event.returnValue = [pos.x, pos.y, color];
+    } catch (error) {
         event.returnValue = [pos.x, pos.y, null];
     }
 });
